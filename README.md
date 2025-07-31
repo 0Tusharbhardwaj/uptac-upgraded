@@ -10,7 +10,7 @@ Based on your **rank**, **category**, **quota**, and other filters, the app show
 
 - ✅ Filter by Rank, Category, Quota, Institute, and Program
 - 📊 Displays opening and closing ranks
-- 📂 Uses real 2024 data (from official UPTAC source)
+- 📂 Uses real 2025 data (from official UPTAC source)
 - 🔍 Fully client-side (no backend needed)
 - 📱 Mobile-friendly UI built with React & Tailwind CSS
 - 📈 Fast and interactive prediction
@@ -25,7 +25,7 @@ The dataset (`uptac_orcr_full.json`) contains:
 - Category & Quota
 - Opening & Closing Ranks
 
-Sourced from: [UPTAC 2024 OR-CR Report](https://admissions.nic.in/UPTAC/applicant/report/orcrreport.aspx)
+Sourced from: [UPTAC 2025 OR-CR Report](https://admissions.nic.in/UPTAC/applicant/report/orcrreport.aspx)
 
 ---
 
@@ -41,7 +41,8 @@ npm start
 Visit http://localhost:3000 in your browser.
 
 🌐 Live Demo
-🚧 Coming Soon...
+🚧uptac-orcr2025.vercel.app
+
 
 📣 Join Our Community
 🎉 Join WhatsApp Counseling Group

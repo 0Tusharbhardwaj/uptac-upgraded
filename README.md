@@ -1,6 +1,6 @@
-# 🎓 UPTAC College Predictor 2024
+# 🎓 UPTAC College Predictor 2025
 
-This is a web-based college prediction tool for students participating in the **UPTAC B.Tech. Counselling 2024**.
+This is a web-based college prediction tool for students participating in the **UPTAC B.Tech. Counselling 2025**.
 
 Based on your **rank**, **category**, **quota**, and other filters, the app shows all eligible colleges and programs from the official opening and closing rank data.
 

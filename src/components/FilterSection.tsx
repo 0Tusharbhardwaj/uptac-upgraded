@@ -47,8 +47,6 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   // Memoize the creation of unique lists to prevent recalculation on every render
   const uniqueInstitutes = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.institute))).sort(), [collegeData]);
   const uniquePrograms = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.program))).sort(), [collegeData]);
-  const uniqueCategories = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.category))).sort(), [collegeData]);
-  const uniqueRounds = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.round))).sort(), [collegeData]);
   
   const filteredInstitutes = uniqueInstitutes.filter(inst => 
     inst.toLowerCase().includes(instituteSearch.toLowerCase())
@@ -158,15 +156,19 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         {/* Category Dropdown */}
         <div className="space-y-2">
           <label className="block text-sm font-semibold text-gray-700">
-            Category
+            Category <span className="text-red-500">*</span>
           </label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium"
           >
-            <option value="">--- All Categories ---</option>
-            {uniqueCategories.map((cat, idx) => (
+            <option value="">Select Category</option>
+            {[
+              "OPEN", "SC", "ST", "BC", "FW", "EWS", "Open(Girl)", 
+              "SC(GIRL)", "ST(GIRL)", "EWS(GL)", "BC(GIRL)", 
+              "BC(AF)", "OPEN(AF)", "SC(AF)", "ST(AF)"
+            ].map((cat, idx) => (
               <option key={idx} value={cat}>{cat}</option>
             ))}
           </select>
@@ -175,15 +177,15 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         {/* Round Dropdown */}
         <div className="space-y-2">
           <label className="block text-sm font-semibold text-gray-700">
-            Round
+            Round (Optional)
           </label>
           <select
             value={round}
             onChange={(e) => setRound(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
           >
-            <option value="">--- All Rounds ---</option>
-            {uniqueRounds.map((rnd, idx) => (
+            <option value="">All Rounds</option>
+            {["Round 1", "Round 2", "Round 3", "Round 4"].map((rnd, idx) => (
               <option key={idx} value={rnd}>{rnd}</option>
             ))}
           </select>

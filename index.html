@@ -1,34 +1,43 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UPTAC B.Tech. Counselling 2025 - Cutoff Data Viewer</title>
-    <meta name="description" content="Explore official opening and closing ranks from the UPTAC B.Tech. counselling based on 2024 data. A tool for the 2025 admission season. Filter by institute, program, category, and round." />
-    <meta name="keywords" content="UPTAC, cutoff, B.Tech, 2025, counselling, opening rank, closing rank, engineering admissions, Uttar Pradesh, UPTU, AKTU" />
-    <style>
-      @media print {
-        body * {
-          visibility: hidden;
-        }
-        .print-area, .print-area * {
-          visibility: visible;
-        }
-        .print-area {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-        }
-        .no-print {
-          display: none !important;
-        }
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/download.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UPTAC B.Tech. Counselling 2025 - Cutoff Data Viewer</title>
+  <meta name="description"
+    content="Explore official opening and closing ranks from the UPTAC B.Tech. counselling based on 2024 data. A tool for the 2025 admission season. Filter by institute, program, category, and round." />
+  <meta name="keywords"
+    content="UPTAC, cutoff, B.Tech, 2025, counselling, opening rank, closing rank, engineering admissions, Uttar Pradesh, UPTU, AKTU" />
+  <style>
+    @media print {
+      body * {
+        visibility: hidden;
       }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+      .print-area,
+      .print-area * {
+        visibility: visible;
+      }
+
+      .print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

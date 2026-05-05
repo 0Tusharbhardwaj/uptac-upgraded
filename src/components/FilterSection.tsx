@@ -73,7 +73,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   }, [institute]);
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+    <div className="rounded-2xl p-4 sm:p-8">
       <div className="flex items-center gap-3 mb-8">
         <div className="p-2 bg-indigo-100 rounded-lg">
           <Filter className="w-6 h-6 text-indigo-600" />

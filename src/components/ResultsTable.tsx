@@ -17,9 +17,12 @@ interface ResultsTableProps {
   results: CollegeData[];
   onExportCSV: () => void;
   onPrint: () => void;
+  onAddChoice: (college: CollegeData) => void;
+  onSelectInstitute: (institute: string) => void;
+  hasSearched: boolean;
 }
 
-const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV }) => {
+const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV, onAddChoice, onSelectInstitute }) => {
   if (results.length === 0) {
     return (
       <div className="bg-white rounded-2xl shadow-lg p-12 text-center border border-gray-100">
@@ -35,8 +38,8 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV }) => 
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 relative">
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center p-8 bg-gradient-to-r from-indigo-50 to-purple-50 border-b border-gray-200">
+    <div className="rounded-2xl overflow-hidden relative">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center p-8 border-b border-gray-200/50 bg-white/30 backdrop-blur-sm">
         <div className="flex items-center gap-3 mb-4 lg:mb-0">
           <div className="p-3 bg-indigo-100 rounded-xl">
             <Trophy className="w-8 h-8 text-indigo-600" />
@@ -94,6 +97,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV }) => 
               </th>
               <th className="px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase">Opening Rank</th>
               <th className="px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase">Closing Rank</th>
+              <th className="px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -156,12 +160,22 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV }) => 
                   <td className="px-6 py-5 whitespace-nowrap text-sm font-bold text-indigo-600">
                     {college.closing_rank.toLocaleString()}
                   </td>
+                  <td className="px-6 py-5 whitespace-nowrap text-sm">
+                    <div className="flex gap-2">
+                      <button onClick={() => onAddChoice(college)} className="text-white bg-indigo-500 hover:bg-indigo-600 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-colors">
+                        Add to List
+                      </button>
+                      <button onClick={() => onSelectInstitute(college.institute)} className="text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-colors">
+                        Compare
+                      </button>
+                    </div>
+                  </td>
                 </tr>
 
                 {/* ✅ Watermark row every 10 rows */}
                 {(index + 1) % 10 === 0 && (
                   <tr>
-                    <td colSpan={8}>
+                    <td colSpan={9}>
                       <div className="text-center py-6 text-gray-300 text-xl italic rotate-[-2deg]">
                         Made by Tushar Bhardwaj
                       </div>

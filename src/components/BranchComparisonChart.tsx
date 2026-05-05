@@ -18,7 +18,7 @@ const BranchComparisonChart: React.FC<ChartProps> = ({ institute, round, categor
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`http://localhost:5000/api/colleges/compare`, {
+        const res = await axios.get(`https://uptac-pro.onrender.com/api/colleges/compare`, {
           params: { institute, round, category }
         });
         // Group and format for chart

@@ -52,7 +52,7 @@ function App() {
       setError(null);
       // Fallback to local JSON if backend not available, but try backend first
       try {
-        const res = await axios.get('http://localhost:5000/api/colleges');
+        const res = await axios.get('https://uptac-pro.onrender.com/api/colleges');
         const mappedData = res.data.map((item: any) => ({
           institute: item.institute,
           program: item.program,

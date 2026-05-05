@@ -34,6 +34,7 @@ function App() {
   const [institute, setInstitute] = useState('');
   const [program, setProgram] = useState('');
   const [round, setRound] = useState('');
+  const [rank, setRank] = useState('');
 
   // Counseling Flow States
   const [choices, setChoices] = useState<any[]>([]);
@@ -97,11 +98,12 @@ function App() {
       await new Promise(resolve => setTimeout(resolve, 500));
       let filtered = collegeData.filter(college => {
         const instituteMatch = !institute || college.institute === institute;
-        const programMatch = !program || college.program === program;
+        const programMatch = !program || college.program.toLowerCase().includes(program.toLowerCase());
         const categoryMatch = !category || college.category === category;
         const roundMatch = !round || college.round === round;
         const quotaMatch = !quota || college.quota === quota;
-        return instituteMatch && programMatch && categoryMatch && roundMatch && quotaMatch;
+        const rankMatch = !rank || (college.closing_rank >= parseInt(rank) && college.opening_rank <= parseInt(rank));
+        return instituteMatch && programMatch && categoryMatch && roundMatch && quotaMatch && rankMatch;
       });
       filtered.sort((a, b) => a.closing_rank - b.closing_rank);
       setFilteredResults(filtered);
@@ -118,6 +120,7 @@ function App() {
     setInstitute('');
     setProgram('');
     setRound('');
+    setRank('');
     setFilteredResults(collegeData.sort((a, b) => a.institute.localeCompare(b.institute)));
     setHasSearched(false);
     setError(null);
@@ -179,6 +182,8 @@ function App() {
                 setProgram={setProgram}
                 round={round}
                 setRound={setRound}
+                rank={rank}
+                setRank={setRank}
                 onSearch={handleSearch}
                 onReset={handleReset}
                 loading={loading}

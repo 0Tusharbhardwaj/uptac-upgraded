@@ -12,6 +12,8 @@ interface FilterSectionProps {
   setProgram: (program: string) => void;
   round: string;
   setRound: (round: string) => void;
+  rank: string;
+  setRank: (rank: string) => void;
   onSearch: () => void;
   onReset: () => void;
   loading: boolean;
@@ -35,40 +37,18 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   setProgram,
   round,
   setRound,
+  rank,
+  setRank,
   onSearch,
   onReset,
   loading,
   collegeData
 }) => {
-  const [instituteSearch, setInstituteSearch] = useState('');
-  const [isInstituteDropdownOpen, setIsInstituteDropdownOpen] = useState(false);
-  const instituteRef = useRef<HTMLDivElement>(null);
+  const uniqueInstitutes = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.institute))).sort(), [collegeData]);
 
   // Memoize the creation of unique lists to prevent recalculation on every render
   const uniqueInstitutes = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.institute))).sort(), [collegeData]);
-  const uniquePrograms = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.program))).sort(), [collegeData]);
-  
-  const filteredInstitutes = uniqueInstitutes.filter(inst => 
-    inst.toLowerCase().includes(instituteSearch.toLowerCase())
-  );
 
-  // Effect to handle clicks outside the institute dropdown
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (instituteRef.current && !instituteRef.current.contains(event.target as Node)) {
-        setIsInstituteDropdownOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-  
-  // Update search input when an institute is selected from the main state
-  useEffect(() => {
-    setInstituteSearch(institute);
-  }, [institute]);
 
   return (
     <div className="rounded-2xl p-4 sm:p-8">
@@ -83,74 +63,20 @@ const FilterSection: React.FC<FilterSectionProps> = ({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {/* Institute Searchable Input */}
-        <div className="space-y-2 relative" ref={instituteRef}>
-          <label className="block text-sm font-semibold text-gray-700">
-            Institute
-          </label>
-          <div className="relative">
-            <input
-              type="text"
-              value={instituteSearch}
-              onChange={(e) => {
-                setInstituteSearch(e.target.value);
-                setInstitute(''); // Clear selection when user types
-                setIsInstituteDropdownOpen(true);
-              }}
-              onFocus={() => setIsInstituteDropdownOpen(true)}
-              placeholder="Search for an institute..."
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium"
-            />
-            {instituteSearch && (
-              <button 
-                onClick={() => {
-                  setInstituteSearch('');
-                  setInstitute('');
-                }} 
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            )}
-          </div>
-          {isInstituteDropdownOpen && (
-            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-              {filteredInstitutes.length > 0 ? (
-                filteredInstitutes.map((inst, idx) => (
-                  <div
-                    key={idx}
-                    onClick={() => {
-                      setInstitute(inst);
-                      setInstituteSearch(inst);
-                      setIsInstituteDropdownOpen(false);
-                    }}
-                    className="px-4 py-2 cursor-pointer hover:bg-indigo-50"
-                  >
-                    {inst}
-                  </div>
-                ))
-              ) : (
-                <div className="px-4 py-2 text-gray-500">No institutes found</div>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Program Dropdown */}
+        
+        {/* ROW 1 */}
+        {/* JEE Rank Input */}
         <div className="space-y-2">
           <label className="block text-sm font-semibold text-gray-700">
-            Program
+            Your JEE Rank <span className="text-red-500">*</span>
           </label>
-          <select
-            value={program}
-            onChange={(e) => setProgram(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
-          >
-            <option value="">--- All Programs ---</option>
-            {uniquePrograms.map((prog, idx) => (
-              <option key={idx} value={prog}>{prog}</option>
-            ))}
-          </select>
+          <input
+            type="number"
+            value={rank}
+            onChange={(e) => setRank(e.target.value)}
+            placeholder="Enter your rank"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium"
+          />
         </div>
 
         {/* Category Dropdown */}
@@ -161,7 +87,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white"
           >
             <option value="">Select Category</option>
             {[
@@ -174,6 +100,54 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           </select>
         </div>
 
+        {/* Quota Dropdown */}
+        <div className="space-y-2">
+          <label className="block text-sm font-semibold text-gray-700">
+            Quota <span className="text-red-500">*</span>
+          </label>
+          <select
+            value={quota}
+            onChange={(e) => setQuota(e.target.value)}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white"
+          >
+            <option value="">Select Quota</option>
+            <option value="Home State">Home State</option>
+            <option value="All India">All India</option>
+          </select>
+        </div>
+
+        {/* ROW 2 */}
+        {/* Institute Dropdown */}
+        <div className="space-y-2">
+          <label className="block text-sm font-semibold text-gray-700">
+            Institute (Optional)
+          </label>
+          <select
+            value={institute}
+            onChange={(e) => setInstitute(e.target.value)}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white"
+          >
+            <option value="">All Institutes</option>
+            {uniqueInstitutes.map((inst, idx) => (
+              <option key={idx} value={inst}>{inst}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Program Input */}
+        <div className="space-y-2">
+          <label className="block text-sm font-semibold text-gray-700">
+            Program (Optional)
+          </label>
+          <input
+            type="text"
+            value={program}
+            onChange={(e) => setProgram(e.target.value)}
+            placeholder="Filter by program name"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium"
+          />
+        </div>
+
         {/* Round Dropdown */}
         <div className="space-y-2">
           <label className="block text-sm font-semibold text-gray-700">
@@ -182,7 +156,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           <select
             value={round}
             onChange={(e) => setRound(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white"
           >
             <option value="">All Rounds</option>
             {["Round 1", "Round 2", "Round 3", "Round 4"].map((rnd, idx) => (
@@ -190,22 +164,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
             ))}
           </select>
         </div>
-        
-        {/* Quota Dropdown */}
-        <div className="space-y-2">
-          <label className="block text-sm font-semibold text-gray-700">
-            Quota
-          </label>
-          <select
-            value={quota}
-            onChange={(e) => setQuota(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium"
-          >
-            <option value="">--- All Quotas ---</option>
-            <option value="Home State">Home State</option>
-            <option value="All India">All India</option>
-          </select>
-        </div>
+
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">

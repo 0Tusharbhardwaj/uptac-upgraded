@@ -35,8 +35,7 @@ app.get('/api/colleges', async (req, res) => {
       filter.institute = { $regex: search as string, $options: 'i' };
     }
 
-    // Limit to 100 for performance
-    const colleges = await CollegeCutoff.find(filter).limit(100).lean();
+    const colleges = await CollegeCutoff.find(filter).lean();
     res.json(colleges);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch colleges' });

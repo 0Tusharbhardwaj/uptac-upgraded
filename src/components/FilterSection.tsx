@@ -46,9 +46,6 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 }) => {
   const uniqueInstitutes = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.institute))).sort(), [collegeData]);
 
-  // Memoize the creation of unique lists to prevent recalculation on every render
-  const uniqueInstitutes = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.institute))).sort(), [collegeData]);
-
 
   return (
     <div className="rounded-2xl p-4 sm:p-8">

@@ -52,21 +52,7 @@ function App() {
     try {
       setDataLoading(true);
       setError(null);
-      // Fallback to local JSON if backend not available, but try backend first
       try {
-        const res = await axios.get('https://uptac-pro.onrender.com/api/colleges', { timeout: 2000 });
-        const mappedData = res.data.map((item: any) => ({
-          institute: item.institute,
-          program: item.program,
-          quota: item.quota,
-          category: item.category,
-          round: item.round,
-          opening_rank: item.openingRank,
-          closing_rank: item.closingRank,
-        }));
-        setCollegeData(mappedData);
-        setFilteredResults(mappedData);
-      } catch {
         const response = await fetch('/uptac_orcr_full.json');
         if (!response.ok) throw new Error('Failed to load college data');
         const data = await response.json();
@@ -81,8 +67,7 @@ function App() {
         }));
         setCollegeData(mappedData);
         setFilteredResults(mappedData.sort((a: any, b: any) => a.institute.localeCompare(b.institute)));
-      }
-    } catch (err) {
+      } catch (err) {
       setError('Failed to load college data. Please refresh the page and try again.');
       console.error('Error loading college data:', err);
     } finally {

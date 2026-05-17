@@ -16,13 +16,23 @@ interface CollegeData {
 interface ResultsTableProps {
   results: CollegeData[];
   onExportCSV: () => void;
+  onExportPDF: () => void;
   onPrint: () => void;
   onAddChoice: (college: CollegeData) => void;
   onSelectInstitute: (institute: string) => void;
   hasSearched: boolean;
 }
 
-const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV, onAddChoice, onSelectInstitute }) => {
+const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV, onExportPDF, onAddChoice, onSelectInstitute }) => {
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 50;
+
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [results]);
+
+  const totalPages = Math.ceil(results.length / itemsPerPage);
+  const currentData = results.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
   if (results.length === 0) {
     return (
       <div className="bg-white rounded-2xl shadow-lg p-12 text-center border border-gray-100">
@@ -55,10 +65,17 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV, onAdd
         <div className="flex gap-3">
           <button
             onClick={onExportCSV}
-            className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 text-sm"
           >
-            <Download className="w-5 h-5" />
-            Export CSV
+            <Download className="w-4 h-4" />
+            CSV
+          </button>
+          <button
+            onClick={onExportPDF}
+            className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 text-sm"
+          >
+            <Download className="w-4 h-4" />
+            PDF
           </button>
         </div>
       </div>
@@ -101,7 +118,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV, onAdd
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {results.map((college, index) => (
+            {currentData.map((college, index) => (
               <React.Fragment key={index}>
                 <tr
                   className={`hover:bg-gray-50 transition-colors duration-200 ${
@@ -110,7 +127,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV, onAdd
                 >
                   <td className="px-6 py-5 whitespace-nowrap">
                     <div className="flex items-center justify-center w-8 h-8 bg-indigo-100 text-indigo-600 rounded-lg font-bold text-sm">
-                      {index + 1}
+                      {(currentPage - 1) * itemsPerPage + index + 1}
                     </div>
                   </td>
                   <td className="px-6 py-5 text-sm text-gray-900">
@@ -188,10 +205,29 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, onExportCSV, onAdd
         </table>
       </div>
 
-      <div className="bg-gray-50 px-8 py-4 border-t border-gray-200">
-        <p className="text-sm text-gray-600 text-center">
-          Showing {results.length} eligible colleges sorted by closing rank (ascending)
+      <div className="bg-gray-50 px-8 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="text-sm text-gray-600 font-medium">
+          Showing {Math.min((currentPage - 1) * itemsPerPage + 1, results.length)} to {Math.min(currentPage * itemsPerPage, results.length)} of {results.length} eligible colleges
         </p>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+            disabled={currentPage === 1 || results.length === 0}
+            className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            Previous
+          </button>
+          <span className="text-sm font-semibold text-gray-700">
+            Page {totalPages === 0 ? 0 : currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages || results.length === 0}
+            className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

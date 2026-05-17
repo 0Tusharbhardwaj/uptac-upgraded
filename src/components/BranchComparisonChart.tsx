@@ -43,12 +43,12 @@ const BranchComparisonChart: React.FC<ChartProps> = ({ institute, round, categor
   if (!institute) return null;
 
   return (
-    <div className="bg-white/70 backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/50 w-full mt-8">
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">Branch Comparison: {institute}</h3>
+    <div className="bg-white/70 backdrop-blur-md rounded-2xl p-6 shadow-sm border border-white/50 w-full h-full flex flex-col dark:bg-slate-800 dark:border-slate-700">
+      <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Branch Comparison: {institute}</h3>
       {loading ? (
-        <div className="flex justify-center items-center h-64"><Loader2 className="animate-spin text-indigo-500" /></div>
+        <div className="flex justify-center items-center h-64 flex-1"><Loader2 className="animate-spin text-indigo-500" /></div>
       ) : (
-        <div className="h-72 w-full">
+        <div className="flex-1 w-full min-h-[288px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" opacity={0.3} />

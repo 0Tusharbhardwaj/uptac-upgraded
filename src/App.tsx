@@ -5,7 +5,8 @@ import FilterSection from './components/FilterSection';
 import ResultsTable from './components/ResultsTable';
 import CounselingSidebar from './components/CounselingSidebar';
 import BranchComparisonChart from './components/BranchComparisonChart';
-import { exportToCSV, printResults } from './utils/csvExport';
+import RankTrendChart from './components/RankTrendChart';
+import { exportToCSV, exportToPDF, printResults } from './utils/csvExport';
 import { AlertCircle, Loader2, Heart, Mail, ListPlus } from 'lucide-react';
 import axios from 'axios';
 
@@ -128,6 +129,7 @@ function App() {
   };
 
   const handleExportCSV = () => exportToCSV(filteredResults, `uptac_cutoff_data.csv`);
+  const handleExportPDF = () => exportToPDF(filteredResults, `uptac_cutoff_data.pdf`);
   const handlePrint = () => printResults();
 
   const handleAddChoice = (college: CollegeData) => {
@@ -193,7 +195,10 @@ function App() {
 
             {selectedInstitute && (
               <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <BranchComparisonChart institute={selectedInstitute} round={round || 'Round 1'} category={category || 'OPEN'} />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <BranchComparisonChart institute={selectedInstitute} round={round || 'Round 1'} category={category || 'OPEN'} />
+                  <RankTrendChart institute={selectedInstitute} collegeData={collegeData} />
+                </div>
               </div>
             )}
 
@@ -201,6 +206,7 @@ function App() {
               <ResultsTable
                 results={filteredResults}
                 onExportCSV={handleExportCSV}
+                onExportPDF={handleExportPDF}
                 onPrint={handlePrint}
                 hasSearched={hasSearched}
                 onAddChoice={handleAddChoice}

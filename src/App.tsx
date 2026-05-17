@@ -156,7 +156,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f8f9ff] via-[#f0f4ff] to-[#f5f3ff] font-sans relative overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8f9ff] via-[#f0f4ff] to-[#f5f3ff] dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 font-sans relative overflow-x-hidden text-gray-900 dark:text-gray-100">
       <Header />
       <UnifiedBanner />
       
@@ -172,7 +172,7 @@ function App() {
               </div>
             )}
 
-            <div className="bg-white/40 backdrop-blur-xl rounded-3xl shadow-xl shadow-indigo-100/50 border border-white/60 p-6 mb-8">
+            <div className="bg-white/40 dark:bg-slate-800/80 backdrop-blur-xl rounded-3xl shadow-xl shadow-indigo-100/50 dark:shadow-none border border-white/60 dark:border-slate-700 p-6 mb-8">
               <FilterSection
                 category={category}
                 setCategory={setCategory}
@@ -202,7 +202,7 @@ function App() {
               </div>
             )}
 
-            <div className="bg-white/40 backdrop-blur-xl rounded-3xl shadow-xl shadow-indigo-100/50 border border-white/60 p-1">
+            <div className="bg-white/40 dark:bg-slate-800/80 backdrop-blur-xl rounded-3xl shadow-xl shadow-indigo-100/50 dark:shadow-none border border-white/60 dark:border-slate-700 p-1">
               <ResultsTable
                 results={filteredResults}
                 onExportCSV={handleExportCSV}
@@ -231,14 +231,14 @@ function App() {
 
       <CounselingSidebar choices={choices} setChoices={setChoices} isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
 
-      <footer className="bg-white/80 backdrop-blur-lg border-t border-indigo-100 py-12 mt-16 shadow-inner">
+      <footer className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-t border-indigo-100 dark:border-slate-800 py-12 mt-16 shadow-inner">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
             <div className="flex items-center justify-center gap-2 text-xl mb-4 font-medium text-gray-800">
               <span>Made with</span>
               <Heart className="w-6 h-6 text-red-500 animate-pulse" />
               <span>by</span>
-              <span className="font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="font-bold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
                 TUSHAR BHARDWAJ
               </span>
             </div>
@@ -249,9 +249,9 @@ function App() {
               </a>
             </div>
           </div>
-          <div className="border-t border-gray-200/60 pt-6 text-center space-y-2">
-            <p className="text-gray-600 font-medium">© 2025 UPTAC Full-Stack Platform.</p>
-            <p className="text-gray-500 text-sm max-w-4xl mx-auto leading-relaxed">
+          <div className="border-t border-gray-200/60 dark:border-slate-800/60 pt-6 text-center space-y-2">
+            <p className="text-gray-600 dark:text-gray-400 font-medium">© 2026 UPTAC Full-Stack Platform.</p>
+            <p className="text-gray-500 dark:text-gray-500 text-sm max-w-4xl mx-auto leading-relaxed">
               Disclaimer: This tool displays historical data for informational purposes only. Final admissions and cutoffs for 2025 will depend on various factors. Always refer to official UPTAC notifications for the most accurate information.
             </p>
           </div>

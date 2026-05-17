@@ -27,7 +27,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-gradient-to-br from-white via-gray-50 to-white border-b border-gray-200 shadow-sm relative">
+    <header className="bg-gradient-to-br from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 border-b border-gray-200 dark:border-slate-800 shadow-sm relative">
       <button
         onClick={toggleTheme}
         className="absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-slate-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors shadow-sm"
@@ -42,16 +42,16 @@ const Header: React.FC = () => {
               <GraduationCap className="w-8 h-8 text-white" />
             </div>
             <div className="text-left">
-              <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-                UPTAC B.Tech. Counselling Predictor <span className="text-indigo-600">2026</span>
+              <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+                UPTAC B.Tech. Counselling Predictor <span className="text-indigo-600 dark:text-indigo-400">2026</span>
               </h1>
-              <p className="text-sm text-gray-600 font-medium mt-1">
+              <p className="text-sm text-gray-600 dark:text-gray-400 font-medium mt-1">
                 Based on 2025 Data
               </p>
             </div>
           </div>
 
-          <p className="text-lg text-gray-700 max-w-3xl leading-relaxed">
+          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl leading-relaxed">
             Explore the official opening and closing ranks from the UPTAC B.Tech 2025 counselling rounds to understand admission trends.
           </p>
 

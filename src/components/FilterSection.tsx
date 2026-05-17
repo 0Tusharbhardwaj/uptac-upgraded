@@ -54,8 +54,8 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           <Filter className="w-6 h-6 text-indigo-600" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Filter Cutoff Data</h2>
-          <p className="text-gray-600">Select your preferences to view specific results</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Filter Cutoff Data</h2>
+          <p className="text-gray-600 dark:text-gray-400">Select your preferences to view specific results</p>
         </div>
       </div>
 
@@ -64,7 +64,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         {/* ROW 1 */}
         {/* JEE Rank Input */}
         <div className="space-y-2">
-          <label className="block text-sm font-semibold text-gray-700">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
             Your JEE Rank <span className="text-red-500">*</span>
           </label>
           <input
@@ -72,19 +72,19 @@ const FilterSection: React.FC<FilterSectionProps> = ({
             value={rank}
             onChange={(e) => setRank(e.target.value)}
             placeholder="Enter your rank"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white dark:bg-slate-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
         </div>
 
         {/* Category Dropdown */}
         <div className="space-y-2">
-          <label className="block text-sm font-semibold text-gray-700">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
             Category <span className="text-red-500">*</span>
           </label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white dark:bg-slate-800 dark:text-white"
           >
             <option value="">Select Category</option>
             {[
@@ -99,13 +99,13 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 
         {/* Quota Dropdown */}
         <div className="space-y-2">
-          <label className="block text-sm font-semibold text-gray-700">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
             Quota <span className="text-red-500">*</span>
           </label>
           <select
             value={quota}
             onChange={(e) => setQuota(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white dark:bg-slate-800 dark:text-white"
           >
             <option value="">Select Quota</option>
             <option value="Home State">Home State</option>
@@ -116,13 +116,13 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         {/* ROW 2 */}
         {/* Institute Dropdown */}
         <div className="space-y-2">
-          <label className="block text-sm font-semibold text-gray-700">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
             Institute (Optional)
           </label>
           <select
             value={institute}
             onChange={(e) => setInstitute(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white dark:bg-slate-800 dark:text-white"
           >
             <option value="">All Institutes</option>
             {uniqueInstitutes.map((inst, idx) => (
@@ -133,7 +133,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 
         {/* Program Input */}
         <div className="space-y-2">
-          <label className="block text-sm font-semibold text-gray-700">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
             Program (Optional)
           </label>
           <input
@@ -141,19 +141,19 @@ const FilterSection: React.FC<FilterSectionProps> = ({
             value={program}
             onChange={(e) => setProgram(e.target.value)}
             placeholder="Filter by program name"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white dark:bg-slate-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
         </div>
 
         {/* Round Dropdown */}
         <div className="space-y-2">
-          <label className="block text-sm font-semibold text-gray-700">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
             Round (Optional)
           </label>
           <select
             value={round}
             onChange={(e) => setRound(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white dark:bg-slate-800 dark:text-white"
           >
             <option value="">All Rounds</option>
             {["Round 1", "Round 2", "Round 3", "Round 4"].map((rnd, idx) => (
@@ -185,7 +185,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 
         <button
           onClick={onReset}
-          className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-200 border border-gray-200"
+          className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 rounded-xl font-semibold hover:bg-gray-200 dark:hover:bg-slate-600 transition-all duration-200 border border-gray-200 dark:border-slate-600"
         >
           <RotateCcw className="w-5 h-5" />
           Reset Filters

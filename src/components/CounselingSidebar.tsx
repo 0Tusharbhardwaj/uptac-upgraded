@@ -105,37 +105,46 @@ const CounselingSidebar: React.FC<SidebarProps> = ({ choices, setChoices, isOpen
   };
 
   return (
-    <div className={`fixed inset-y-0 right-0 w-80 sm:w-96 bg-white/80 backdrop-blur-xl border-l border-white/50 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-      <div className="p-5 border-b border-gray-200/50 flex justify-between items-center bg-white/50">
-        <h2 className="text-lg font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Counseling Flow</h2>
-        <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-700">✕</button>
-      </div>
+    <>
+      {/* Overlay for clicking outside to close */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/20 dark:bg-black/50 z-40 backdrop-blur-sm transition-opacity"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+      <div className={`fixed inset-y-0 right-0 w-80 sm:w-96 bg-white/80 backdrop-blur-xl border-l border-white/50 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="p-5 border-b border-gray-200/50 flex justify-between items-center bg-white/50">
+          <h2 className="text-lg font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Counseling Flow</h2>
+          <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-700">✕</button>
+        </div>
 
-      <div className="flex-1 overflow-y-auto p-4">
-        {choices.length === 0 ? (
-          <div className="text-center text-gray-500 mt-10">
-            <p>No choices added yet.</p>
-            <p className="text-sm mt-2">Search and add colleges to your list.</p>
+        <div className="flex-1 overflow-y-auto p-4">
+          {choices.length === 0 ? (
+            <div className="text-center text-gray-500 mt-10">
+              <p>No choices added yet.</p>
+              <p className="text-sm mt-2">Search and add colleges to your list.</p>
+            </div>
+          ) : (
+            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+              <SortableContext items={choices.map(c => c.id)} strategy={verticalListSortingStrategy}>
+                {choices.map(choice => (
+                  <SortableItem key={choice.id} id={choice.id} choice={choice} onRemove={handleRemove} />
+                ))}
+              </SortableContext>
+            </DndContext>
+          )}
+        </div>
+
+        {choices.length > 0 && (
+          <div className="p-4 border-t border-gray-200/50 bg-white/50 backdrop-blur-md">
+            <button onClick={exportPDF} className="w-full py-3 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-xl shadow-lg shadow-indigo-200 flex items-center justify-center gap-2 transition-all">
+              <FileDown size={18} /> Export as PDF
+            </button>
           </div>
-        ) : (
-          <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-            <SortableContext items={choices.map(c => c.id)} strategy={verticalListSortingStrategy}>
-              {choices.map(choice => (
-                <SortableItem key={choice.id} id={choice.id} choice={choice} onRemove={handleRemove} />
-              ))}
-            </SortableContext>
-          </DndContext>
         )}
       </div>
-
-      {choices.length > 0 && (
-        <div className="p-4 border-t border-gray-200/50 bg-white/50 backdrop-blur-md">
-          <button onClick={exportPDF} className="w-full py-3 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-xl shadow-lg shadow-indigo-200 flex items-center justify-center gap-2 transition-all">
-            <FileDown size={18} /> Export as PDF
-          </button>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 

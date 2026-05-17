@@ -7,7 +7,7 @@ import CounselingSidebar from './components/CounselingSidebar';
 import BranchComparisonChart from './components/BranchComparisonChart';
 import RankTrendChart from './components/RankTrendChart';
 import { exportToCSV, exportToPDF, printResults } from './utils/csvExport';
-import { AlertCircle, Loader2, Heart, Mail, ListPlus } from 'lucide-react';
+import { AlertCircle, Loader2, Heart, Mail, ListPlus, X } from 'lucide-react';
 import axios from 'axios';
 
 interface CollegeData {
@@ -178,9 +178,15 @@ function App() {
             </div>
 
             {selectedInstitute && (
-              <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-500 relative bg-white/40 dark:bg-slate-800/50 backdrop-blur-md rounded-3xl p-6 border border-white/60 dark:border-slate-700">
+                <div className="flex justify-between items-center mb-6 px-2">
+                  <h2 className="text-xl font-bold text-gray-800 dark:text-white">Institute Analysis</h2>
+                  <button onClick={() => setSelectedInstitute('')} className="p-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <BranchComparisonChart institute={selectedInstitute} round={round || 'Round 1'} category={category || 'OPEN'} />
+                  <BranchComparisonChart institute={selectedInstitute} round={round || 'Round 1'} category={category || 'OPEN'} collegeData={collegeData} />
                   <RankTrendChart institute={selectedInstitute} collegeData={collegeData} />
                 </div>
               </div>

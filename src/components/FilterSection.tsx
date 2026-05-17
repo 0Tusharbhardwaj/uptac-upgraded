@@ -49,6 +49,11 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   const uniqueQuotas = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.quota).filter(Boolean))).sort(), [collegeData]);
   const uniqueRounds = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.round).filter(Boolean))).sort(), [collegeData]);
 
+  React.useEffect(() => {
+    if (quota === 'All India') {
+      setCategory('OPEN');
+    }
+  }, [quota, setCategory]);
 
   return (
     <div className="rounded-2xl p-4 sm:p-8">

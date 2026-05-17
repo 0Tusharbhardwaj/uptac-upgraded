@@ -44,7 +44,10 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   loading,
   collegeData
 }) => {
-  const uniqueInstitutes = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.institute))).sort(), [collegeData]);
+  const uniqueInstitutes = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.institute).filter(Boolean))).sort(), [collegeData]);
+  const uniqueCategories = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.category).filter(Boolean))).sort(), [collegeData]);
+  const uniqueQuotas = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.quota).filter(Boolean))).sort(), [collegeData]);
+  const uniqueRounds = React.useMemo(() => Array.from(new Set(collegeData.map(c => c.round).filter(Boolean))).sort(), [collegeData]);
 
 
   return (
@@ -87,11 +90,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
             className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white dark:bg-slate-800 dark:text-white"
           >
             <option value="">Select Category</option>
-            {[
-              "OPEN", "SC", "ST", "BC", "FW", "EWS", "Open(Girl)", 
-              "SC(GIRL)", "ST(GIRL)", "EWS(GL)", "BC(GIRL)", 
-              "BC(AF)", "OPEN(AF)", "SC(AF)", "ST(AF)"
-            ].map((cat, idx) => (
+            {uniqueCategories.map((cat, idx) => (
               <option key={idx} value={cat}>{cat}</option>
             ))}
           </select>
@@ -108,8 +107,9 @@ const FilterSection: React.FC<FilterSectionProps> = ({
             className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white dark:bg-slate-800 dark:text-white"
           >
             <option value="">Select Quota</option>
-            <option value="Home State">Home State</option>
-            <option value="All India">All India</option>
+            {uniqueQuotas.map((q, idx) => (
+              <option key={idx} value={q}>{q}</option>
+            ))}
           </select>
         </div>
 
@@ -156,7 +156,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
             className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-lg font-medium bg-white dark:bg-slate-800 dark:text-white"
           >
             <option value="">All Rounds</option>
-            {["Round 1", "Round 2", "Round 3", "Round 4"].map((rnd, idx) => (
+            {uniqueRounds.map((rnd, idx) => (
               <option key={idx} value={rnd}>{rnd}</option>
             ))}
           </select>

@@ -103,7 +103,7 @@ function App() {
         const categoryMatch = !category || college.category === category;
         const roundMatch = !round || college.round === round;
         const quotaMatch = !quota || college.quota === quota;
-        const rankMatch = !rank || (college.closing_rank >= parseInt(rank) && college.opening_rank <= parseInt(rank));
+        const rankMatch = !rank || (college.closing_rank >= parseInt(rank));
         return instituteMatch && programMatch && categoryMatch && roundMatch && quotaMatch && rankMatch;
       });
       filtered.sort((a, b) => a.closing_rank - b.closing_rank);

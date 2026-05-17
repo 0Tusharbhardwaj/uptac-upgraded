@@ -13,9 +13,9 @@ const WhatsAppBanner: React.FC = () => {
               <GraduationCap className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold mb-1">Need Help with Counselling?</h3>
+              <h3 className="text-xl font-bold mb-1">Admission & Counselling Assistance</h3>
               <p className="text-indigo-100 text-sm">
-                Join our WhatsApp group for expert guidance and check out our new tool for Other Courses!
+                Join our WhatsApp group for direct admissions and check out our new tool for Other Courses!
               </p>
               <a
                 href="https://other-college-predictor.vercel.app/"
@@ -31,7 +31,7 @@ const WhatsAppBanner: React.FC = () => {
 
           {/* Join WhatsApp Button */}
           <a
-            href="https://chat.whatsapp.com/I5B4dCtJem8A3JEgSiKtgM?mode=r_c"
+            href="https://chat.whatsapp.com/GSOTYrnN70lLLz8TVeuGlz"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-white text-indigo-700 px-6 py-3 rounded-xl font-bold text-base hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"

@@ -12,10 +12,10 @@ const Header: React.FC = () => {
             </div>
             <div className="text-left">
               <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-                UPTAC B.Tech. Counselling <span className="text-indigo-600">2025</span>
+                UPTAC B.Tech. Counselling Predictor <span className="text-indigo-600">2026</span>
               </h1>
               <p className="text-sm text-gray-600 font-medium mt-1">
-                Opening & Closing Ranks based on 2025 Data
+                Based on 2025 Data
               </p>
             </div>
           </div>

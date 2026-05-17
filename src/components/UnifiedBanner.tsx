@@ -13,12 +13,12 @@ const UnifiedBanner: React.FC = () => {
               <GraduationCap className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold mb-1">Need Help with Counselling?</h3>
+              <h3 className="text-xl font-bold mb-1">Admission & Counselling Assistance</h3>
               <p className="text-indigo-100 text-sm mb-3">
-                Join our WhatsApp group for expert guidance, peer support, and alerts.
+                Join our WhatsApp group for direct admissions and expert counselling guidance.
               </p>
               <a
-                href="https://chat.whatsapp.com/J90VTEyVjclFnYn2E6p1Rw?mode=r_c"
+                href="https://chat.whatsapp.com/GSOTYrnN70lLLz8TVeuGlz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-white text-indigo-700 px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105 shadow"
